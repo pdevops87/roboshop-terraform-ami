@@ -6,6 +6,6 @@ data "aws_ami" "ami"{
   }
 }
 data "aws_security_group" "sg"{
-  group-name = "allow-all"
+  name = "allow-all"
 }
 
