@@ -1,6 +1,6 @@
 # create an ec2 instance with existing ami
 resource "aws_instance" "instance" {
-  ami           = data.aws_ami.ami.id
+  ami           = "ami-0220d79f3f480ecf5"
   instance_type = "t3.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
 }
