@@ -20,3 +20,9 @@ resource "null_resource" "ansible" {
     ]
   }
 }
+
+# convert instance into a new ami image
+resource "aws_ami_from_instance" "ami" {
+  name               = "roboshop-ami"
+  source_instance_id = aws_instance.instance.id
+}
