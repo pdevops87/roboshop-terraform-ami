@@ -1,10 +1,16 @@
-gt github:
-  git pull
+# Makefile
+.PHONY: help git dev-apply
 
-a apply:
-  terraform init
-  terraform apply -auto-approve
+help: ## Display this help message
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n\nTargets:\n"} /^[a-zA-Z0-9_-]+:.*##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-d destroy:
-  terraform init
-  terraform destroy -auto-approve
+git: ## Pull latest code from git repo
+	git pull
+
+dev-apply: ## Terraform init & apply for dev environment
+	terraform init
+	terraform apply
+
+dev-destroy: ## Terraform init & destroy for dev environment
+	terraform init
+	terraform destroy
