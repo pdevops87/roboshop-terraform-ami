@@ -9,8 +9,9 @@ git: ## Pull latest code from git repo
 
 dev-apply: ## Terraform init & apply for dev environment
 	terraform init
-	terraform apply
+	terraform apply -auto-approve
 
-dev-destroy: ## Terraform init & destroy for dev environment
+dev-destroy: ## Terraform init & destroy for dev environment and to prevent destroy from a state list
 	terraform init
-	terraform destroy
+	terraform state rm aws_ami.ami
+	terraform destroy -auto-approve

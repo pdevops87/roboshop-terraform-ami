@@ -3,7 +3,7 @@ resource "aws_instance" "instance" {
   ami           = data.aws_ami.ami.image_id
   instance_type = "t3.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
-}
+ }
 
 # run the ansible scripts like packages
 resource "null_resource" "ansible" {
@@ -25,4 +25,7 @@ resource "null_resource" "ansible" {
 resource "aws_ami_from_instance" "ami" {
   name               = "roboshop-ami"
   source_instance_id = aws_instance.instance.id
+  lifecycle {
+    prevent_destroy = true
+  }
 }
